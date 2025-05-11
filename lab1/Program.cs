@@ -4,7 +4,15 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Problem problem = new Problem(10, 1);
+            Console.WriteLine(problem.ToString());
+
+            Result result = problem.Solve(20);
+            Console.WriteLine(problem.ToString());
+
+            Console.WriteLine(result.ToString());
+
+
         }
     }
 }

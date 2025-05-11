@@ -16,10 +16,12 @@ namespace lab1
             items = new List<int>();
         }
 
-        public string ToString() { 
-            string items_str = string.Join(",", items.Select(x => x.ToString()).ToArray());
+        public override string ToString() {
+            string items_str = string.Join(", ", items);
+            string weigth_str = string.Join("\ntotal weigth: ", total_weight.ToString());
+            string value_str = string.Join("\ntotal value: ", total_value.ToString());
 
-
+            return $"result: {items_str}, [w,v]=[{weigth_str}, {value_str}]";
         }
     }
 }

@@ -2,24 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+
+[assembly: InternalsVisibleTo("TestProject1")]
 
 namespace lab1
 {
     internal class Problem
     {
-        public List<Item> Items;
-        int n_items = 0;
+        public List<Item> items;
         public Problem(int n, int seed)
         {
             Random random = new Random(seed);
-            Items = new List<Item>();
+            items = new List<Item>();
 
             for (int i = 0; i < n; i++) {
                 int value = random.Next(1, 11);
                 int weigth = random.Next(1, 11);
-                Items.Add(new Item(value, weigth, i));
+                items.Add(new Item(value, weigth, i));
             }
 
         }
@@ -33,13 +35,14 @@ namespace lab1
             //if n=0?
 
             //operatory <, > są przeciążone, uwzględniają wartość i masę
-            Items.Sort();
+            items.Sort();
+            items.Reverse();
 
-            for (int i = 0; i < Items.Count; i++) {
-                if (Items[i].weigth + cur_weigth <= capacity) {
-                    result.items.Add(i);
-                    cur_weigth += Items[i].weigth;
-                    cur_value += Items[i].value;
+            for (int i = 0; i < items.Count; i++) {
+                if (items[i].weight + cur_weigth <= capacity) {
+                    result.items.Add(items[i].index);
+                    cur_weigth += items[i].weight;
+                    cur_value += items[i].value;
                 }
             }
 
@@ -47,6 +50,11 @@ namespace lab1
             result.total_value = cur_value;
 
             return result;
+        }
+
+        public override string ToString()
+        {
+            return string.Join(Environment.NewLine, items.Select(item => item.ToString()));
         }
     }
 }
